@@ -32,19 +32,23 @@ if (missingVars.length > 0) {
     `Por favor, crea un archivo .env en la raíz del proyecto con estas variables.\n` +
     `Consulta SETUP.md para más información.`;
   console.error(errorMessage);
-  alert(errorMessage);
-  throw new Error('Variables de entorno de Firebase faltantes. Ver consola para más detalles.');
+  // En desarrollo, mostrar alert solo si estamos en el navegador
+  if (typeof window !== 'undefined' && import.meta.env.DEV) {
+    console.warn('⚠️ La aplicación podría no funcionar correctamente sin las variables de entorno de Firebase.');
+    console.warn('⚠️ Variables faltantes:', missingVars.join(', '));
+  }
+  // NO lanzar error que rompa la app - permitir que se renderice aunque Firebase no funcione
 }
 
 // Configuración de Firebase - Las credenciales deben venir de variables de entorno
 export const firebaseConfig = {
-  apiKey: requiredEnvVars.apiKey,
-  authDomain: requiredEnvVars.authDomain,
+  apiKey: requiredEnvVars.apiKey || '',
+  authDomain: requiredEnvVars.authDomain || '',
   databaseURL: import.meta.env.VITE_FIREBASE_DATABASE_URL, // Opcional
-  projectId: requiredEnvVars.projectId,
-  storageBucket: requiredEnvVars.storageBucket,
-  messagingSenderId: requiredEnvVars.messagingSenderId,
-  appId: requiredEnvVars.appId,
+  projectId: requiredEnvVars.projectId || '',
+  storageBucket: requiredEnvVars.storageBucket || '',
+  messagingSenderId: requiredEnvVars.messagingSenderId || '',
+  appId: requiredEnvVars.appId || '',
 };
 
 // Initialize Firebase
