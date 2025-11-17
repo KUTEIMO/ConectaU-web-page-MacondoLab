@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Briefcase, GraduationCap, Building2, Shield, ArrowRight, CheckCircle, Lock, Award, Smartphone, Download, Apple, Loader } from 'lucide-react';
 import { getProjects } from '../services/projectsService';
+import { APK_DOWNLOAD_URL, APK_FILENAME } from '../constants/downloads';
 
 export default function Landing() {
   const [stats, setStats] = useState({
@@ -312,9 +313,11 @@ export default function Landing() {
                       <p>v1.0.0 - Universal APK</p>
                     </div>
                     <a
-                      href="/app-releasev1-universal.apk"
-                      download="ConectaU.apk"
+                      href={APK_DOWNLOAD_URL}
                       className="w-full btn-primary inline-flex items-center justify-center gap-2 py-3 text-sm sm:text-base touch-manipulation"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      title={`Descargar ${APK_FILENAME}`}
                     >
                       <Download className="h-4 w-4 sm:h-5 sm:w-5" />
                       <span>Descargar APK</span>
