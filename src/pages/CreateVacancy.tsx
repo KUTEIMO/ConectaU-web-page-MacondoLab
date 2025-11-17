@@ -60,7 +60,6 @@ export default function CreateVacancy() {
         benefits: data.benefits.split('\n').filter(b => b.trim()),
         minExperience: data.minExperience || undefined,
         maxExperience: data.maxExperience || undefined,
-        applicationsCount: 0,
       };
 
       await createProject(project);
