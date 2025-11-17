@@ -9,9 +9,13 @@
     "preview": "vite preview",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "seed:conversations": "node scripts/backfill-conversations.js",
+    "pre-deploy": "powershell -ExecutionPolicy Bypass -File scripts\\verificar-pre-deploy.ps1",
     "deploy": "npm run build:prod && firebase deploy --only hosting",
     "deploy:all": "npm run build:prod && firebase deploy --only hosting,firestore:rules,storage",
-    "deploy:rules": "firebase deploy --only firestore:rules,storage"
+    "deploy:hosting": "npm run build:prod && firebase deploy --only hosting",
+    "deploy:firestore": "firebase deploy --only firestore:rules",
+    "deploy:rules": "firebase deploy --only firestore:rules,storage",
+    "deploy:full": "powershell -ExecutionPolicy Bypass -File scripts\\deploy-produccion.ps1"
   },
   "dependencies": {
     "firebase": "^10.14.1",
