@@ -40,3 +40,19 @@ google-services.json
 .flutter-plugins
 .flutter-plugins-dependencies
 
+# Archivos locales de desarrollo y pruebas
+_local/
+*.local.md
+*VERIFICACION*.md
+*ESTADO*.md
+*DEPLOYMENT_EXITOSO*.md
+*GUIA_DEPLOY_PRODUCCION*.md
+*SOLUCION*.md
+Deploy-FirebaseDemo.ps1
+Check-FirebaseSecurity.ps1
+
+# Carpetas de prueba y desarrollo local
+main/
+firebase/
+.firebase/
+0
