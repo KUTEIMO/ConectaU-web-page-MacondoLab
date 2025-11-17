@@ -36,3 +36,7 @@ firebase-admin-key.json
 serviceAccountKey.json
 google-services.json
 
+# Flutter generated files
+.flutter-plugins
+.flutter-plugins-dependencies
+
