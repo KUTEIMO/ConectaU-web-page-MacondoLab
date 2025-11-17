@@ -226,10 +226,12 @@ export const updateApplicationStatus = async (
       
       if (projectDoc.exists()) {
         const project = projectDoc.data();
-        const statusMessages = {
+        const statusMessages: Record<string, string> = {
+          pending: 'está pendiente',
           reviewed: 'tu postulación está siendo revisada',
           accepted: 'tu postulación fue aceptada',
           rejected: 'tu postulación fue rechazada',
+          interview: 'tienes una entrevista programada',
         };
         
         await addDoc(collection(db, 'notifications'), {
