@@ -542,7 +542,7 @@ Este proyecto es desarrollado para la Universidad Simón Bolívar. Para contribu
 
 Desarrollado por estudiantes e instituciones universitarias de Cúcuta, Colombia.
 
-**Universidades Participantes:**
+**Universidades Participantes: solo con fines educativos no es real la conexion con esas universidades (solo universidad simon bolvar)**
 - Universidad Simón Bolívar (UNISIMON)
 - Universidad Francisco de Paula Santander (UFPS)
 - Universidad de Santander (UDES)
@@ -553,7 +553,7 @@ Desarrollado por estudiantes e instituciones universitarias de Cúcuta, Colombia
 ## 📞 Contacto
 
 Para más información sobre el proyecto, consulta la página de [Avisos Legales](https://conectau-be1a2.web.app/legal).
-
+e_soto2@unisimon.edu.co
 ---
 
-**Última actualización:** Enero 2025
+**Última actualización:** Noniembre 2025
