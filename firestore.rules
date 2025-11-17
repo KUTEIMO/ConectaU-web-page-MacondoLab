@@ -1,0 +1,211 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Función helper: verificar autenticación
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    // Función helper: es el usuario actual
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+    
+    // Función helper: obtener datos del usuario
+    function getUserData() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data;
+    }
+    
+    // Función helper: verificar rol del usuario
+    function hasRole(role) {
+      return isAuthenticated() && getUserData().role == role;
+    }
+    
+    // Función helper: verificar que solo se actualicen campos de estado permitidos
+    function onlyStatusFieldsChanged() {
+      let allowedFields = ['status', 'applicationsCount', 'updatedAt'];
+      return request.resource.data.diff(resource.data).affectedKeys()
+        .hasOnly(allowedFields);
+    }
+    
+    // ============ USERS ============
+    match /users/{userId} {
+      // Lectura: usuarios autenticados pueden leer perfiles públicos o el suyo propio
+      allow read: if isAuthenticated() && (
+        isOwner(userId) || 
+        resource.data.get('isPublic', false) == true
+      );
+      
+      // Creación: solo durante registro (el usuario crea su propio perfil)
+      allow create: if isOwner(userId) && 
+        request.resource.data.id == request.auth.uid;
+      
+      // Actualización: solo el dueño, y solo campos permitidos según política
+      allow update: if isOwner(userId) && (
+        // Permitir agregar campos nuevos (merge)
+        request.resource.data.diff(resource.data).affectedKeys()
+          .hasOnly(['photoUrl', 'isActive', 'isVerified', 'isPublic', 'skills', 
+                    'experience', 'portfolio', 'resumeUrl', 'phone', 'address', 
+                    'availability', 'university', 'career', 'semester', 'gpa',
+                    'companyName', 'industry', 'companySize', 'website', 
+                    'description', 'nit', 'contactPerson', 'contactPosition', 
+                    'updatedAt']) ||
+        // O actualizar campos de estado
+        request.resource.data.diff(resource.data).affectedKeys()
+          .hasOnly(['isActive', 'isVerified', 'photoUrl', 'updatedAt'])
+      );
+      
+      // NO eliminar usuarios (según política)
+      allow delete: if false;
+    }
+    
+    // ============ PROJECTS (Vacantes) ============
+    match /projects/{projectId} {
+      // Lectura: usuarios autenticados pueden leer proyectos activos
+      allow read: if isAuthenticated();
+      
+      // Creación: solo empresas pueden crear proyectos
+      allow create: if hasRole('company') && 
+        request.resource.data.companyId == request.auth.uid &&
+        request.resource.data.status == 'active';
+      
+      // Actualización: solo la empresa dueña, solo campos de estado permitidos
+      allow update: if isAuthenticated() && 
+        resource.data.companyId == request.auth.uid && (
+          // Solo actualizar status y applicationsCount
+          request.resource.data.diff(resource.data).affectedKeys()
+            .hasOnly(['status', 'applicationsCount', 'updatedAt']) ||
+          // O incrementar applicationsCount
+          request.resource.data.applicationsCount > resource.data.get('applicationsCount', 0)
+        );
+      
+      // NO eliminar proyectos (según política de base de datos)
+      allow delete: if false;
+    }
+    
+    // ============ APPLICATIONS ============
+    match /applications/{applicationId} {
+      // Lectura: el estudiante o la empresa relacionada pueden leer
+      allow read: if isAuthenticated() && (
+        resource.data.studentId == request.auth.uid ||
+        resource.data.companyId == request.auth.uid
+      );
+      
+      // Creación: estudiantes pueden crear aplicaciones
+      allow create: if hasRole('student') && 
+        request.resource.data.studentId == request.auth.uid;
+      
+      // Actualización: solo actualizar status (por empresa o admin)
+      allow update: if isAuthenticated() && (
+        // La empresa puede actualizar el status
+        resource.data.companyId == request.auth.uid ||
+        // O es admin
+        hasRole('admin')
+      ) && request.resource.data.diff(resource.data).affectedKeys()
+        .hasOnly(['status', 'reviewedAt', 'updatedAt']);
+      
+      // NO eliminar aplicaciones
+      allow delete: if false;
+    }
+    
+    // ============ NOTIFICATIONS ============
+    match /notifications/{notificationId} {
+      // Lectura: solo el usuario dueño
+      allow read: if isOwner(resource.data.userId);
+      
+      // Creación: sistema o usuarios relacionados pueden crear
+      allow create: if isAuthenticated() && 
+        request.resource.data.userId is string;
+      
+      // Actualización: solo actualizar isRead
+      allow update: if isOwner(resource.data.userId) &&
+        request.resource.data.diff(resource.data).affectedKeys()
+          .hasOnly(['isRead']);
+      
+      // NO eliminar notificaciones
+      allow delete: if false;
+    }
+    
+    // ============ FAVORITES ============
+    match /favorites/{favoriteId} {
+      // Lectura y escritura: solo el dueño
+      allow read, write: if isAuthenticated() && 
+        resource.data.studentId == request.auth.uid;
+      
+      allow create: if hasRole('student') && 
+        request.resource.data.studentId == request.auth.uid;
+    }
+    
+    // ============ SAVED PROFILES ============
+    match /savedProfiles/{savedProfileId} {
+      // Lectura y escritura: solo la empresa dueña
+      allow read, write: if hasRole('company') && 
+        resource.data.companyId == request.auth.uid;
+      
+      allow create: if hasRole('company') && 
+        request.resource.data.companyId == request.auth.uid;
+    }
+    
+    // ============ STUDENT PROFILES ============
+    match /student_profiles/{profileId} {
+      // Lectura: el dueño o perfiles públicos
+      allow read: if isAuthenticated() && (
+        isOwner(profileId) ||
+        resource.data.get('isPublic', false) == true
+      );
+      
+      // Escritura: solo el dueño
+      allow write: if isOwner(profileId);
+    }
+    
+    // ============ CONVERSATIONS ============
+    match /conversations/{conversationId} {
+      // Lectura y escritura: solo participantes
+      allow read, write: if isAuthenticated() && 
+        request.auth.uid in resource.data.participants;
+      
+      allow create: if isAuthenticated() && 
+        request.auth.uid in request.resource.data.participants;
+    }
+    
+    // ============ MESSAGES ============
+    // Mensajes como subcolección de conversaciones
+    match /conversations/{conversationId}/messages/{messageId} {
+      // Necesitamos verificar que el usuario es participante de la conversación padre
+      allow read, write: if isAuthenticated() && 
+        request.auth.uid in get(/databases/$(database)/documents/conversations/$(conversationId)).data.participants;
+      
+      allow create: if isAuthenticated() && 
+        request.resource.data.senderId == request.auth.uid &&
+        request.auth.uid in get(/databases/$(database)/documents/conversations/$(conversationId)).data.participants;
+    }
+    
+    // Mensajes como colección raíz (si también existen)
+    match /messages/{messageId} {
+      allow read, write: if isAuthenticated() && 
+        request.auth.uid == resource.data.senderId;
+      
+      allow create: if isAuthenticated() && 
+        request.resource.data.senderId == request.auth.uid;
+    }
+    
+    // ============ COMPANIES ============
+    match /companies/{companyId} {
+      // Lectura: usuarios autenticados
+      allow read: if isAuthenticated();
+      
+      // Creación: solo la empresa dueña
+      allow create: if hasRole('company') && companyId == request.auth.uid;
+      
+      // Actualización: solo la empresa dueña
+      allow update: if isOwner(companyId);
+      
+      // Subcolección savedProfiles
+      match /savedProfiles/{savedProfileId} {
+        allow read, write: if hasRole('company') && 
+          companyId == request.auth.uid;
+      }
+    }
+  }
+}
