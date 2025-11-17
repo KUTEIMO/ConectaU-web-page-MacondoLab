@@ -168,7 +168,6 @@ export default function Login() {
               <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-text-secondary" />
               <input
                 id="email"
-                name="email"
                 type="email"
                 autoComplete="username email"
                 {...register('email', { required: 'El email es requerido' })}
@@ -189,7 +188,6 @@ export default function Login() {
               <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-text-secondary" />
               <input
                 id="password"
-                name="password"
                 type="password"
                 autoComplete="current-password"
                 {...register('password', { required: 'La contraseña es requerida' })}

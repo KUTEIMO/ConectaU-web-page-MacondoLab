@@ -1,8 +1,8 @@
-import { Navigate } from 'react-router-dom';
+import { ReactNode } from 'react';
 import { useAuthStore } from '../../store/authStore';
 
 interface LandingRouteProps {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 export default function LandingRoute({ children }: LandingRouteProps) {
