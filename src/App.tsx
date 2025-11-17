@@ -59,7 +59,12 @@ function App() {
   }, [setCurrentUser, setUserData, setLoading]);
 
   return (
-    <BrowserRouter>
+    <BrowserRouter
+      future={{
+        v7_startTransition: true,
+        v7_relativeSplatPath: true,
+      }}
+    >
       <Routes>
         {/* Públicas */}
         <Route
