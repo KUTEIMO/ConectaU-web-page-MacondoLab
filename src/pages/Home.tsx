@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Briefcase, MapPin, DollarSign, Clock, Search, TrendingUp, Users, FileText, CalendarClock, GraduationCap, BookmarkCheck, Download, Smartphone, Apple, Loader } from 'lucide-react';
 import { useAuthStore } from '../store/authStore';
 import { getProjects } from '../services/projectsService';
+import { APK_DOWNLOAD_URL, APK_FILENAME } from '../constants/downloads';
 import { getApplicationsByStudent } from '../services/applicationsService';
 import { getCompanyStats, getStudentStats } from '../services/dashboardService';
 import { Application, Project, StudentWithProfile } from '../types';
@@ -298,7 +299,6 @@ const renderProjectsSection = (title: string) => (
 
   const isStudent = userData?.role === 'student';
   const isCompany = userData?.role === 'company';
-  const isAdmin = userData?.role === 'admin';
 
   // Sección de descargas para móviles
   const DownloadsSection = () => (
@@ -323,9 +323,11 @@ const renderProjectsSection = (title: string) => (
                 <p className="text-xs sm:text-sm text-text-secondary">Disponible ahora</p>
               </div>
               <a
-                href="/app-releasev1-universal.apk"
-                download="ConectaU.apk"
+                href={APK_DOWNLOAD_URL}
                 className="btn-primary inline-flex items-center justify-center gap-2 px-3 sm:px-4 py-2 text-xs sm:text-sm touch-manipulation w-full sm:w-auto"
+                target="_blank"
+                rel="noopener noreferrer"
+                title={`Descargar ${APK_FILENAME}`}
               >
                 <Download className="h-3 w-3 sm:h-4 sm:w-4" />
                 <span>Descargar APK</span>

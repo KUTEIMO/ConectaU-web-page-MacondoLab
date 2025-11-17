@@ -62,6 +62,7 @@ export default function JobDetail() {
 
   const handleApply = async () => {
     if (!id || !currentUser || userData?.role !== 'student') return;
+    if (!project) return;
     setApplying(true);
     try {
       await createApplication({
