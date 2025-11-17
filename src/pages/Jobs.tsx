@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Briefcase, MapPin, DollarSign, Clock, Search, Filter, X } from 'lucide-react';
+import { Briefcase, MapPin, DollarSign, Clock, Search, X } from 'lucide-react';
 import { getProjects } from '../services/projectsService';
 import { Project } from '../types';
 

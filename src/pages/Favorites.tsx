@@ -27,7 +27,7 @@ export default function Favorites() {
           return { ...fav, project };
         })
       );
-      setFavorites(favoritesWithProjects.filter((fav) => fav.project !== null));
+      setFavorites(favoritesWithProjects.filter((fav) => fav.project !== null) as Array<{ id: string; studentId: string; projectId: string; createdAt: Date; project?: Project }>);
     } catch (error) {
       console.error('Error loading favorites:', error);
     } finally {
