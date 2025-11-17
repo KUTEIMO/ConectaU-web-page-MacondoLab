@@ -84,7 +84,6 @@ export default function Register() {
               <User className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-text-secondary" />
               <input
                 id="name"
-                name="name"
                 type="text"
                 autoComplete="name"
                 {...register('name', { required: 'El nombre es requerido' })}
@@ -105,7 +104,6 @@ export default function Register() {
               <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-text-secondary" />
               <input
                 id="register-email"
-                name="email"
                 type="email"
                 autoComplete="email username"
                 {...register('email', { required: 'El email es requerido' })}
@@ -124,7 +122,6 @@ export default function Register() {
             </label>
             <select
               id="role"
-              name="role"
               autoComplete="off"
               {...register('role', { required: true })}
               className="w-full px-4 py-2 border border-border rounded-md focus:ring-2 focus:ring-primary focus:border-transparent"
@@ -142,7 +139,6 @@ export default function Register() {
               <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-text-secondary" />
               <input
                 id="new-password"
-                name="password"
                 type="password"
                 autoComplete="new-password"
                 {...register('password', {
@@ -166,7 +162,6 @@ export default function Register() {
               <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-text-secondary" />
               <input
                 id="confirm-password"
-                name="confirmPassword"
                 type="password"
                 autoComplete="new-password"
                 {...register('confirmPassword', {
