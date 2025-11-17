@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Shield, AlertTriangle, Info, FileText, ArrowLeft, Code, TestTube } from 'lucide-react';
+import { Shield, AlertTriangle, Info, FileText, ArrowLeft, Code, TestTube, Mail, Users, GraduationCap, User } from 'lucide-react';
 
 export default function Legal() {
   return (
@@ -189,15 +189,143 @@ export default function Legal() {
               </div>
             </section>
 
+            {/* Equipo de desarrollo */}
+            <section>
+              <div className="flex items-center mb-3 sm:mb-4">
+                <Users className="h-5 w-5 sm:h-6 sm:w-6 text-primary mr-2" />
+                <h2 className="text-xl sm:text-2xl font-semibold text-text-primary">
+                  Equipo de Desarrollo
+                </h2>
+              </div>
+              <div className="bg-surface rounded-lg p-4 sm:p-5 space-y-4">
+                <div>
+                  <h3 className="font-semibold text-text-primary mb-2 text-base sm:text-lg">
+                    Desarrollador Principal
+                  </h3>
+                  <div className="bg-white rounded-lg p-3 sm:p-4 border border-border">
+                    <div className="flex items-start space-x-3">
+                      <User className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                      <div className="flex-1">
+                        <p className="font-semibold text-text-primary text-sm sm:text-base">
+                          Eduardo José Soto Herrera
+                        </p>
+                        <p className="text-xs sm:text-sm text-text-secondary mt-1">
+                          Facultad de Ingenierías - Ingeniería de Sistemas
+                        </p>
+                        <p className="text-xs sm:text-sm text-text-secondary mt-2 leading-relaxed">
+                          <strong className="text-text-primary">Responsable del desarrollo</strong> de la aplicación móvil, 
+                          página web y creador de toda la lógica de la plataforma. 
+                          Arquitectura, implementación técnica y funcionalidades del sistema.
+                        </p>
+                        <div className="mt-3 flex items-center space-x-2">
+                          <Mail className="h-4 w-4 text-text-secondary" />
+                          <a 
+                            href="mailto:e_soto2@unisimon.edu.co" 
+                            className="text-xs sm:text-sm text-primary hover:underline"
+                          >
+                            e_soto2@unisimon.edu.co
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <h3 className="font-semibold text-text-primary mb-2 text-base sm:text-lg">
+                    Proyecto Académico - Innovación y Emprendimiento 2
+                  </h3>
+                  <p className="text-sm sm:text-base text-text-secondary leading-relaxed mb-3">
+                    Este proyecto forma parte del curso de <strong className="text-text-primary">Innovación y Emprendimiento 2</strong> 
+                    de la Universidad Simón Bolívar. El siguiente equipo ha contribuido con la conceptualización, 
+                    presentaciones, diseño y aspectos de planificación del proyecto:
+                  </p>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                    <div className="bg-white rounded-lg p-3 border border-border">
+                      <p className="font-semibold text-text-primary text-xs sm:text-sm mb-1">
+                        Eduardo José Soto Herrera
+                      </p>
+                      <p className="text-xs text-text-secondary">
+                        Desarrollo de aplicación móvil y página web
+                      </p>
+                    </div>
+                    <div className="bg-white rounded-lg p-3 border border-border">
+                      <p className="font-semibold text-text-primary text-xs sm:text-sm mb-1">
+                        Marco Jhoan Sierra Ariza
+                      </p>
+                      <p className="text-xs text-text-secondary">
+                        Diseño de interfaces y prototipos en Figma
+                      </p>
+                    </div>
+                    <div className="bg-white rounded-lg p-3 border border-border">
+                      <p className="font-semibold text-text-primary text-xs sm:text-sm mb-1">
+                        Karen Yuliet Ramirez Gallo
+                      </p>
+                      <p className="text-xs text-text-secondary">
+                        Relaciones sociales y comunicación del proyecto
+                      </p>
+                    </div>
+                    <div className="bg-white rounded-lg p-3 border border-border">
+                      <p className="font-semibold text-text-primary text-xs sm:text-sm mb-1">
+                        William Dubay Valbuena Rojas
+                      </p>
+                      <p className="text-xs text-text-secondary">
+                        Relaciones legales y aspectos normativos
+                      </p>
+                    </div>
+                    <div className="bg-white rounded-lg p-3 border border-border sm:col-span-2">
+                      <p className="font-semibold text-text-primary text-xs sm:text-sm mb-1">
+                        Lissette Viviana Cardenas Pallares
+                      </p>
+                      <p className="text-xs text-text-secondary">
+                        Diseño de identidad de marca y elementos visuales
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
             {/* Contacto */}
             <section className="border-t border-border pt-6 sm:pt-8">
-              <h2 className="text-lg sm:text-xl font-semibold text-text-primary mb-3">
-                Contacto
-              </h2>
-              <p className="text-sm sm:text-base text-text-secondary leading-relaxed">
-                Si tiene preguntas sobre esta plataforma o necesita más información sobre el proyecto, 
-                puede contactarnos a través de los canales oficiales de la Universidad Simón Bolívar.
-              </p>
+              <div className="flex items-center mb-3 sm:mb-4">
+                <Mail className="h-5 w-5 sm:h-6 sm:w-6 text-primary mr-2" />
+                <h2 className="text-lg sm:text-xl font-semibold text-text-primary">
+                  Contacto
+                </h2>
+              </div>
+              <div className="bg-surface rounded-lg p-4 sm:p-5">
+                <p className="text-sm sm:text-base text-text-secondary leading-relaxed mb-4">
+                  Si tiene preguntas sobre esta plataforma, necesita más información sobre el proyecto, 
+                  o desea reportar algún problema técnico, puede contactar directamente al desarrollador responsable:
+                </p>
+                <div className="bg-white rounded-lg p-4 border border-border">
+                  <div className="flex items-start space-x-3">
+                    <GraduationCap className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                    <div className="flex-1">
+                      <p className="font-semibold text-text-primary text-sm sm:text-base mb-2">
+                        Eduardo José Soto Herrera
+                      </p>
+                      <p className="text-xs sm:text-sm text-text-secondary mb-3">
+                        Desarrollador Principal - Facultad de Ingenierías (Ingeniería de Sistemas)
+                      </p>
+                      <div className="flex items-center space-x-2">
+                        <Mail className="h-4 w-4 text-text-secondary" />
+                        <a 
+                          href="mailto:e_soto2@unisimon.edu.co" 
+                          className="text-sm sm:text-base text-primary hover:underline font-medium"
+                        >
+                          e_soto2@unisimon.edu.co
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <p className="text-xs sm:text-sm text-text-secondary mt-4 italic">
+                  También puede contactar a través de los canales oficiales de la Universidad Simón Bolívar 
+                  para consultas generales sobre el proyecto académico.
+                </p>
+              </div>
             </section>
           </div>
         </div>
