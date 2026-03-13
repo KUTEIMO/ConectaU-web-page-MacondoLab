@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Briefcase, GraduationCap, Building2, Shield, ArrowRight, CheckCircle, Lock, Award, Smartphone, Download, Apple, Loader } from 'lucide-react';
 import { getProjects } from '../services/projectsService';
 import { APK_DOWNLOAD_URL, APK_FILENAME } from '../constants/downloads';
+import LeadCaptureSection from '../components/Landing/LeadCaptureSection';
 
 export default function Landing() {
   const [stats, setStats] = useState({
@@ -280,6 +281,9 @@ export default function Landing() {
           </div>
         </div>
       </section>
+
+      {/* Lead Capture Section */}
+      <LeadCaptureSection />
 
       {/* Descargas de apps móviles */}
       <section className="bg-white py-12 sm:py-16 md:py-20">
