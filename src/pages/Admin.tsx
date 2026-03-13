@@ -369,6 +369,14 @@ export default function Admin() {
             Métricas globales y ratios para tus reportes semanales.
           </p>
         </Link>
+
+        <Link to="/admin/email-campaigns" className="card hover:shadow-md transition-shadow">
+          <FileText className="h-12 w-12 text-primary mb-4" />
+          <h3 className="text-xl font-semibold mb-2">Campañas de Email</h3>
+          <p className="text-text-secondary text-sm">
+            Crear vacantes y enviar correos a leads capturados automáticamente.
+          </p>
+        </Link>
       </div>
     </div>
   );

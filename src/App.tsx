@@ -27,6 +27,7 @@ import Admin from './pages/Admin';
 import AdminUsers from './pages/AdminUsers';
 import AdminVacancies from './pages/AdminVacancies';
 import AdminAnalytics from './pages/AdminAnalytics';
+import VacancyManager from './components/Admin/VacancyManager';
 import Talent from './pages/Talent';
 import StudentProfile from './pages/StudentProfile';
 import SavedProfiles from './pages/SavedProfiles';
@@ -276,6 +277,16 @@ function App() {
             <ProtectedRoute allowedRoles={['admin']}>
               <Layout>
                 <AdminAnalytics />
+              </Layout>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/email-campaigns"
+          element={
+            <ProtectedRoute allowedRoles={['admin']}>
+              <Layout>
+                <VacancyManager />
               </Layout>
             </ProtectedRoute>
           }
