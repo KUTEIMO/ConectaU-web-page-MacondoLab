@@ -73,26 +73,41 @@ export default function Landing() {
         <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
           <div className="text-center">
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-text-primary mb-4 sm:mb-6 px-2">
-              ConectaU — conecta talento universitario con oportunidades reales.
+              ConectaU  conecta talento universitario con oportunidades reales.
             </h2>
             <p className="text-base sm:text-lg md:text-xl text-text-secondary max-w-2xl mx-auto mb-6 sm:mb-8 px-4">
               Plataforma verificada por universidades que facilita proyectos cortos, pagos seguros por escrow y portafolios certificados para estudiantes universitarios
             </p>
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4">
-              <Link
-                to="/register"
-                className="btn-primary inline-flex items-center justify-center space-x-2 py-3 sm:py-2 px-6 text-sm sm:text-base touch-manipulation"
+            <div className="flex flex-col items-center justify-center gap-6 px-4 mt-8">
+              <h3 className="text-2xl sm:text-3xl font-bold text-primary mb-2">Únete al lanzamiento de ConectaU</h3>
+              <p className="text-base sm:text-lg text-text-secondary max-w-xl mx-auto mb-2">Regístrate y sé de los primeros estudiantes y empresas en conocer la plataforma que conecta talento universitario con proyectos reales.</p>
+              <a
+                href="https://forms.app/form/69b5c9809e518e0002192eea?preview=true"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-primary inline-flex items-center justify-center space-x-2 py-3 sm:py-3 px-8 sm:px-10 text-lg sm:text-xl font-semibold rounded-md shadow-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 bg-primary text-white hover:bg-primary-dark touch-manipulation mt-2"
+                style={{ minWidth: '220px', minHeight: '56px' }}
               >
-                <Briefcase className="h-5 w-5" />
-                <span>Crear perfil</span>
-              </Link>
-              <Link
-                to="/jobs"
-                className="btn-secondary inline-flex items-center justify-center space-x-2 py-3 sm:py-2 px-6 text-sm sm:text-base touch-manipulation"
-              >
-                <span>Explorar proyectos</span>
-                <ArrowRight className="h-5 w-5" />
-              </Link>
+                <span>Quiero registrarme</span>
+                <ArrowRight className="h-6 w-6" />
+              </a>
+                      {/* Botones originales debajo del CTA */}
+                      <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4 mt-4 w-full">
+                        <Link
+                          to="/register"
+                          className="btn-primary inline-flex items-center justify-center space-x-2 py-3 sm:py-2 px-6 text-sm sm:text-base touch-manipulation"
+                        >
+                          <Briefcase className="h-5 w-5" />
+                          <span>Crear perfil</span>
+                        </Link>
+                        <Link
+                          to="/jobs"
+                          className="btn-secondary inline-flex items-center justify-center space-x-2 py-3 sm:py-2 px-6 text-sm sm:text-base touch-manipulation"
+                        >
+                          <span>Explorar proyectos</span>
+                          <ArrowRight className="h-5 w-5" />
+                        </Link>
+                      </div>
             </div>
           </div>
         </div>
