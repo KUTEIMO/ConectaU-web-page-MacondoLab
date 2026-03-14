@@ -5,7 +5,7 @@ import { getProjects } from '../services/projectsService';
 import { APK_DOWNLOAD_URL, APK_FILENAME } from '../constants/downloads';
 
 // URL del formulario externo de registro
-const EXTERNAL_FORM_URL = 'https://forms.app/form/69b5c9809e518e0002192eea?preview=true';
+const EXTERNAL_FORM_URL = 'https://show.forms.app/form/69b5c9809e518e0002192eea';
 
 export default function Landing() {
   const [stats, setStats] = useState({
