@@ -1,0 +1,109 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    border-color: #E5E7EB;
+  }
+  html {
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background-color: #EFEFEF;
+    color: #2B3D3F;
+    overflow-x: hidden;
+    /* Mejoras para móviles */
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+  
+  /* Mejorar scroll en móviles */
+  @supports (-webkit-overflow-scrolling: touch) {
+    * {
+      -webkit-overflow-scrolling: touch;
+    }
+  }
+  
+  /* Áreas táctiles más grandes en móviles */
+  @media (max-width: 640px) {
+    button, a, input, select, textarea {
+      min-height: 44px;
+      min-width: 44px;
+    }
+  }
+}
+
+@layer components {
+  .card {
+    @apply bg-white rounded-lg shadow-sm p-6;
+    border: 1px solid #E5E7EB;
+  }
+  
+  .btn-primary {
+    @apply text-white px-4 py-2 rounded-md transition-colors;
+    background-color: #FF8F4F;
+  }
+  .btn-primary:hover {
+    background-color: #E6763A;
+  }
+  
+  .btn-secondary {
+    @apply text-white px-4 py-2 rounded-md transition-colors;
+    background-color: #0A4B70;
+  }
+  .btn-secondary:hover {
+    background-color: #073A57;
+  }
+  
+  /* Clase para elementos táctiles optimizados */
+  .touch-manipulation {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+  }
+  
+  /* Evitar overflow horizontal */
+  .overflow-x-hidden {
+    overflow-x: hidden;
+  }
+  
+  /* Mejorar texto en móviles */
+  @media (max-width: 640px) {
+    .text-responsive {
+      font-size: clamp(0.875rem, 2.5vw, 1rem);
+    }
+  }
+}
+
+/* Media queries adicionales para responsividad */
+@media (max-width: 375px) {
+  /* Pantallas muy pequeñas (iPhone SE, etc) */
+  .card {
+    @apply p-4;
+  }
+}
+
+@media (min-width: 640px) and (max-width: 768px) {
+  /* Tablets pequeñas */
+}
+
+@media (min-width: 1024px) and (max-width: 1280px) {
+  /* Pantallas medianas */
+}
+
+@media (min-width: 1920px) {
+  /* Pantallas grandes */
+  .max-w-7xl {
+    max-width: 80rem;
+  }
+}
+
+/* Soporte para pantallas de alta densidad */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  /* Optimizaciones para pantallas Retina/alta resolución */
+}
+
